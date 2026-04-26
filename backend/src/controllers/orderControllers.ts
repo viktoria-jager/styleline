@@ -11,40 +11,37 @@ export const createOrder = async (req: Request, res: Response) => {
 
     let totalPrice = 0;
 
-    // 1. total számítás products táblából
     for (const item of items) {
-      const result = await db.query(
-        "SELECT price FROM products WHERE id = $1",
+      const [rows]: any = await db.query(
+        "SELECT price FROM products WHERE id = ?",
         [item.productId]
       );
 
-      const product = result.rows[0];
+      const product = rows[0];
       if (!product) continue;
 
       totalPrice += product.price * item.quantity;
     }
 
-    // 2. order létrehozás
-    const orderResult = await db.query(
-      "INSERT INTO orders (total_price) VALUES ($1) RETURNING id",
+    const [result]: any = await db.query(
+      "INSERT INTO orders (total_price) VALUES (?)",
       [totalPrice]
     );
 
-    const orderId = orderResult.rows[0].id;
+    const orderId = result.insertId;
 
-    // 3. order_items mentés
     for (const item of items) {
-      const result = await db.query(
-        "SELECT price FROM products WHERE id = $1",
+      const [rows]: any = await db.query(
+        "SELECT price FROM products WHERE id = ?",
         [item.productId]
       );
 
-      const product = result.rows[0];
+      const product = rows[0];
       if (!product) continue;
 
       await db.query(
         `INSERT INTO order_items (order_id, product_id, quantity, price)
-         VALUES ($1, $2, $3, $4)`,
+         VALUES (?, ?, ?, ?)`,
         [orderId, item.productId, item.quantity, product.price]
       );
     }

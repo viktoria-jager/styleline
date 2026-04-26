@@ -91,7 +91,7 @@ function checkout() {
     return;
   }
 
-  fetch("http://localhost:3000/orders", {
+  fetch("http://localhost:3000/api/orders", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
@@ -115,3 +115,4 @@ function checkout() {
 
 
 loadCart();
+

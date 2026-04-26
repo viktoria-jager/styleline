@@ -9,7 +9,9 @@ app.use(cors());
 app.use(express.json());
 
 app.use("/products", productRoutes);
-app.use("/orders", orderRoutes);
+app.use("/api/orders", orderRoutes);
+
+
 
 app.listen(3000, () => {
     console.log("Server running on http://localhost:3000");

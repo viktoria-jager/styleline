@@ -1,13 +1,12 @@
 import { Request, Response } from "express";
 import { db } from "../db/db";
 
-export const getProducts = (req: Request, res: Response) => {
-    db.query("SELECT * FROM products", (err: any, results: any) => {
-        if (err) {
-            console.error(err);
-            return res.status(500).json({ error: "DB error" });
-        }
-
-        res.json(results);
-    });
+export const getProducts = async (req: Request, res: Response) => {
+  try {
+    const [rows] = await db.query("SELECT * FROM products");
+    return res.json(rows);
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ message: "Server error" });
+  }
 };
