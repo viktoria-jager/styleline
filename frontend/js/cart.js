@@ -4,7 +4,7 @@ function loadCart() {
 
   container.innerHTML = "";
 
-  fetch("http://localhost:3000/products")
+  fetch("http://localhost:3000/api/products")
     .then(res => res.json())
     .then(products => {
       let total = 0;
@@ -13,7 +13,7 @@ function loadCart() {
         const product = products.find(p => p.id === item.productId);
         if (!product) return;
 
-        const subtotal = product.price * item.quantity;
+        const subtotal = product.priceEUR * item.quantity;
         total += subtotal;
 
         const div = document.createElement("div");
@@ -21,7 +21,7 @@ function loadCart() {
 
         div.innerHTML = `
           <h3>${product.name}</h3>
-          <p>${product.price} €</p>
+          <p>${product.priceEUR} €</p>
 
           <p>Subtotal: ${subtotal.toFixed(2)} €</p>
           <button onclick="removeFromCart(${item.productId})">Remove</button>

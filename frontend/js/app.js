@@ -13,8 +13,8 @@ async function loadProducts() {
     
        div.innerHTML = `
          <h3>${p.name}</h3>
-         <img src="${p.image_url}" alt="${p.name}" />
-         <p>${(parseFloat(p.price)).toFixed(2)} €</p>
+         <img src="http://localhost:3000/uploads/${p.image}" alt="${p.name}" />
+         <p>${(parseFloat(p.priceEUR)).toFixed(2)} €</p>
          <p>${p.description}</p>
          <button>Add to Cart</button>
        `;

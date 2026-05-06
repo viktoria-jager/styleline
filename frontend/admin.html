@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Styleline-Admin</title>
+</head>
+<body>
+
+<h2>Products</h2>
+
+<ul id="productList"></ul>
+<button id="deleteBtn">Delete</button>
+<button id="editBtn">Edit</button>
+<h2>New Products</h2>
+
+<input id="name" placeholder="Product Name" />
+<input id="priceEUR" placeholder="Price" type="number" />
+<input id="description" placeholder="Description" />
+<input id="image" type="file" />
+
+<button id="addBtn">Add Product</button>
+<p id="adminMsg"></p>
+
+
+<h2>Orders</h2>
+
+<button id="loadOrdersBtn">Load Orders</button>
+<ul id="orders"></ul>
+
+<h2>Appointments</h2>
+<button onclick="loadAppointments()">Load Appointments</button>
+<ul id="appointments"></ul>
+
+<h2>Hairdresser Admin Panel</h2>
+
+<select id="hairdresser"></select>
+
+<select id="weekday">
+  <option value="1">Monday</option>
+  <option value="2">Tuesday</option>
+  <option value="3">Wednesday</option>
+  <option value="4">Thursday</option>
+  <option value="5">Friday</option>
+  <option value="6">Saturday</option>
+  <option value="0">Sunday</option>
+</select>
+
+<input type="time" id="startTime">
+<input type="time" id="endTime">
+
+<button onclick="saveSchedule()">Save</button>
+
+<h3>Current schedule</h3>
+<div id="list"></div>
+
+<p id="adminMsg"></p>
+
+<script src="js/admin.js"></script>
+
+</body>
+</html>
